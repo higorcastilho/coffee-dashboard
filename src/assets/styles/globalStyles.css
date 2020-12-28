@@ -1,0 +1,22 @@
+html {
+  font-size: 62.5%;
+}
+
+:root {
+	--color-primary: #2c3e50;
+	--color-primary-darker: #202020;
+	--color-primary-lighter: #949bb5;
+
+	--color-primary-border-button: #d8bcf5;
+	--color-primary-button: #bfa7d9;
+};
+
+html, body, #root {
+	width: 100vw;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
