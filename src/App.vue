@@ -1,13 +1,13 @@
 <template>
   <theme-provider
     :theme="{
-      dark: dark
+      dark: isDark
   }">
     <c-main-container>
       <!-- If admin is logged -->
       <div v-if="isLogged">
           <switch-button
-            @buttonswitch="dark=!dark"
+            @buttonswitch="isDark=!isDark"
           />
           <router-view></router-view>
       </div>
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       isLogged: isLoggedIn(),
-      dark: false
+      isDark: false
     }
   }
 }
