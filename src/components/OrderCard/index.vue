@@ -1,8 +1,9 @@
 <template>
   <c-order-card :order="order">
     <c-left-section>
-      <c-circle />
-      <c-id-title>#{{order.customerId.slice(0, 8)}}</c-id-title>
+      <c-circle-green v-if="isPaid"/>
+      <c-circle-orange v-else/>
+      <c-id-title>#{{order._id.slice(0, 8)}}</c-id-title>
       <c-paragraph>{{order.customer[0].email}}</c-paragraph>
     </c-left-section>
 
@@ -19,7 +20,8 @@ import {
   COrderCard,
   CLeftSection,
   CRightSection,
-  CCircle,
+  CCircleGreen,
+  CCircleOrange,
   CIdTitle,
   CPrice,
   CParagraph
@@ -31,7 +33,8 @@ export default {
     COrderCard,
     CLeftSection,
     CRightSection,
-    CCircle,
+    CCircleGreen,
+    CCircleOrange,
     CIdTitle,
     CPrice,
     CParagraph
@@ -41,6 +44,29 @@ export default {
       type: Object,
       required: true
     }
+  },
+  data() {
+    return {
+      isPaid: false
+    }
+  },
+  methods: {
+    handleLeftCircleColor () {
+      const status = this.order.orderStatus
+      if (status === 'sim') {
+        console.log('passou aqui')
+        this.isPaid = true
+      } else if (status === 'não') {
+        this.isPaid = false
+      }
+    }
+  },
+  updated() {
+    this.handleLeftCircleColor()
+  },
+
+  mounted() {
+    this.handleLeftCircleColor()
   }
 }
 </script>

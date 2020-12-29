@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueSocketIO from 'vue-socket.io'
 
 import './assets/styles/globalStyles.css'
 
@@ -11,7 +12,13 @@ import router from './routes'
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
+Vue.use(new VueSocketIO({
+		debug: true,
+		connection: 'http://localhost:5000'
+	})
+)
+
 new Vue({
-  render: h => h(App),
-  router
+  router,
+  render: h => h(App)
 }).$mount('#app')

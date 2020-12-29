@@ -23,7 +23,7 @@ export const CLeftSection = styled.section`
 export const CRightSection = styled.section`
 `
 
-export const CCircle = styled.aside`
+export const CCircleGreen = styled.aside`
 	width: 3.2rem;
 	height: 3.2rem;
 	border-radius: 50%;
@@ -31,6 +31,10 @@ export const CCircle = styled.aside`
 	margin-right: .5rem;
 	grid-column: 1/3;
 	grid-row: 1/3;
+`
+
+export const CCircleOrange = styled(CCircleGreen)`
+	background: tomato;
 `
 
 export const CIdTitle = styled.h4`

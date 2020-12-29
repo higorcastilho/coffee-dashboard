@@ -27,17 +27,16 @@ export default {
 	}
 
 	input[type="checkbox"] {
-		margin: 4rem 2rem;
-	}
-
-	input[type="checkbox"] {
 		position: relative;
+		margin: 4rem 2rem;
 		width: 6.5rem;
 		height: 2.5rem;
 		border-radius: 7rem;
 		-webkit-appearance: none;
 		background: #d9d8dd;
 		transition: .5s;
+		outline: none;
+		cursor: pointer;
 	}
 
 	input:checked[type="checkbox"] {

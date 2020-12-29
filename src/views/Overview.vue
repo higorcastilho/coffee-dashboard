@@ -4,7 +4,7 @@
 		<main id="overview-main">
 			<order-card 
 				v-for="order in orders" 
-				:key="order.customerId" 
+				:key="order._id" 
 				:order="order"
 			/>
 		</main>
@@ -30,9 +30,41 @@ export default {
 		}
   },
 
+  sockets: {
+		connect: function () {
+			console.log('socket connected')
+		},
+		notification: function (data) {
+			const updatedOrderId = data.data.orderId
+
+			const updatedOrderList = this.orders.map( order => {
+				if (order._id === updatedOrderId) {
+					order.orderStatus = "sim"
+					return order
+				} else {
+					return order
+				}
+			})
+			this.orders = [...updatedOrderList]
+		},
+		newOrder: function (data) {
+			const { _id, email, orderStatus, price, quantity } = data.data
+			const newOrder = {
+				_id,
+				customer: [{ email }],
+				orderStatus,
+				price,
+				quantity
+			}
+			console.log(newOrder)
+			const updatedOrderList = [ newOrder, ...this.orders ]
+			this.orders = [ ...updatedOrderList ]
+		}
+  },
+
   methods: {
 		async getOrders () {
-			const response = await Orders.index(10, 1)
+			const response = await Orders.index(30, 1)
 			return response
 		}
 	},
