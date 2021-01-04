@@ -34,8 +34,8 @@ export default {
 		connect: function () {
 			console.log('socket connected')
 		},
-		notification: function (data) {
-			const updatedOrderId = data.data.orderId
+		updateStatus: function (data) {
+			const updatedOrderId = data
 
 			const updatedOrderList = this.orders.map( order => {
 				if (order._id === updatedOrderId) {
@@ -47,8 +47,8 @@ export default {
 			})
 			this.orders = [...updatedOrderList]
 		},
-		newOrder: function (data) {
-			const { _id, email, orderStatus, price, quantity } = data.data
+		popUpOrder: function (data) {
+			const { _id, email, orderStatus, price, quantity } = data
 			const newOrder = {
 				_id,
 				customer: [{ email }],
@@ -56,7 +56,6 @@ export default {
 				price,
 				quantity
 			}
-			console.log(newOrder)
 			const updatedOrderList = [ newOrder, ...this.orders ]
 			this.orders = [ ...updatedOrderList ]
 		}
