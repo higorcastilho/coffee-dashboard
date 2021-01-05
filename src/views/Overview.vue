@@ -48,6 +48,7 @@ export default {
 			this.orders = [...updatedOrderList]
 		},
 		popUpOrder: function (data) {
+			console.log(data)
 			const { _id, email, orderStatus, price, quantity } = data
 			const newOrder = {
 				_id,
