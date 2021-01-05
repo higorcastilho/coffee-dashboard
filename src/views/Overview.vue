@@ -2,11 +2,13 @@
 	<div id="overview-wrapper">
 		<overview-header />
 		<main id="overview-main">
-			<order-card 
-				v-for="order in orders" 
-				:key="order._id" 
-				:order="order"
-			/>
+			<transition-group name="list">
+				<order-card 
+					v-for="order in orders" 
+					:key="order._id" 
+					:order="order"
+				/>
+			</transition-group>
 		</main>
 	</div>
 </template>
@@ -48,7 +50,7 @@ export default {
 			this.orders = [...updatedOrderList]
 		},
 		popUpOrder: function (data) {
-			console.log(data)
+			
 			const { _id, email, orderStatus, price, quantity } = data
 			const newOrder = {
 				_id,
@@ -57,7 +59,8 @@ export default {
 				price,
 				quantity
 			}
-			const updatedOrderList = [ newOrder, ...this.orders ]
+			const updatedOrderList = [ ...this.orders ]
+			updatedOrderList.unshift(newOrder)
 			this.orders = [ ...updatedOrderList ]
 		}
   },
@@ -81,4 +84,14 @@ export default {
 	#overview-main {
 		padding: 1rem 1.5rem;
 	}
+
+	.list-enter-active, .list-leave-active {
+		transition: all .5s;
+	}
+
+	.list-enter, .list-leave-to {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+
 </style>
