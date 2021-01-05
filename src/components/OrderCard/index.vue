@@ -1,8 +1,10 @@
 <template>
   <c-order-card :order="order">
     <c-left-section>
-      <c-circle-green v-if="isPaid"/>
-      <c-circle-orange v-else/>
+      <transition name="green-circle">
+        <c-circle-green v-if="isPaid"/>
+        <c-circle-orange v-else/>
+      </transition>
       <c-id-title>#{{order._id.slice(0, 8)}}</c-id-title>
       <c-paragraph>{{order.customer[0].email}}</c-paragraph>
     </c-left-section>
@@ -71,5 +73,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .green-circle-enter {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+
+  .green-circle-enter-active {
+    transition: all .8s;
+  }
+
+  .green-circle-enter-to {
+    opacity: 1;
+    transform: scale(1)
+  }
 </style>
